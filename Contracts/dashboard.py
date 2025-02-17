@@ -1,16 +1,22 @@
 import streamlit as st
 from Utils.data import *
-from dotenv import load_dotenv
 import os
 from st_aggrid import AgGrid , GridOptionsBuilder
 from st_aggrid.shared import JsCode
+
+
+
 st.set_page_config(page_title='Tender Platform', page_icon='📑',layout='wide')
 
-load_dotenv()
 
 # Get Supabase URL and API key from environment
-SUPABASE_URL     = os.getenv("SUPABASE_URL")
-SUPABASE_API_KEY = os.getenv("SUPABASE_API_KEY")
+
+SUPABASE_URL = st.secrets['SUPABASE_URL'] 
+SUPABASE_API_KEY = st.secrets['SUPABASE_API_KEY'] 
+
+
+# SUPABASE_URL     = os.getenv("SUPABASE_URL")
+# SUPABASE_API_KEY = os.getenv("SUPABASE_API_KEY")
 
 st.header('Monitoring Tender Platform',divider=True)
 ## Side Bar
