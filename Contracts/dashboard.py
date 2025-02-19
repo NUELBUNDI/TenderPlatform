@@ -4,7 +4,7 @@ import os
 from st_aggrid import AgGrid , GridOptionsBuilder
 from st_aggrid.shared import JsCode
 
-
+from datetime import date
 
 st.set_page_config(page_title='Tender Platform', page_icon='📑',layout='wide')
 
@@ -33,8 +33,16 @@ display_data = DisplayContractData(url=SUPABASE_URL, api_key=SUPABASE_API_KEY, k
 # Retrieve data from the database
 data = display_data.select_data_from_db()
 
+
 # Filter data based on keywords
 filtered_data = display_data.filter_by_key_words()
+
+today                         = date.today()  # Returns a datetime.date object
+filtered_data['created_at']   = pd.to_datetime(filtered_data['created_at']).dt.date
+filtered_data                 = filtered_data[filtered_data['created_at']>=today]
+
+# st.write(filtered_data)
+
 filtered_data.reset_index(drop=True,inplace=True)
 filtered_data['Public Url'] = 'https://tenders.go.ke/tenders/' + filtered_data['tender_id'].astype(str)
 filtered_data = filtered_data[['published_date','tender_no','procument_method','procument_category','close_date','tender_fee','submission_method','Public Url','tender_title']]
