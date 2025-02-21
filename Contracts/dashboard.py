@@ -36,10 +36,8 @@ data = display_data.select_data_from_db()
 
 # Filter data based on keywords
 filtered_data = display_data.filter_by_key_words()
-
-today                         = date.today()  # Returns a datetime.date object
 filtered_data['created_at']   = pd.to_datetime(filtered_data['created_at']).dt.date
-filtered_data                 = filtered_data[filtered_data['created_at']>=today]
+filtered_data                 = filtered_data[filtered_data['created_at']>=filtered_data['created_at'].max()]
 
 # st.write(filtered_data)
 
