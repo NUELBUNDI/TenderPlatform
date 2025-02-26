@@ -6,8 +6,6 @@ dashboard = st.Page(
 )
 
 
-
-
 pg = st.navigation(
         {
             "Account": [dashboard],

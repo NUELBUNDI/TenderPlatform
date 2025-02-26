@@ -11,7 +11,7 @@ st.set_page_config(page_title='Tender Platform', page_icon='📑',layout='wide')
 
 # Get Supabase URL and API key from environment
 
-SUPABASE_URL = st.secrets['SUPABASE_URL'] 
+SUPABASE_URL     = st.secrets['SUPABASE_URL'] 
 SUPABASE_API_KEY = st.secrets['SUPABASE_API_KEY'] 
 
 
@@ -37,6 +37,7 @@ data = display_data.select_data_from_db()
 # Filter data based on keywords
 filtered_data = display_data.filter_by_key_words()
 filtered_data['created_at']   = pd.to_datetime(filtered_data['created_at']).dt.date
+filtered_data['created_at']   = pd.to_datetime(filtered_data['created_at'])
 filtered_data                 = filtered_data[filtered_data['created_at']>=filtered_data['created_at'].max()]
 
 # st.write(filtered_data)
